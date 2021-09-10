@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  jupyter:
+    image: 'jupyter/datascience-notebook:latest'
+    ports:
+     - 8888:8888
+    volumes:
+      - ./work:/home/jovyan/work
+    deploy:
+		  resources:
+			  limits:
+				  cpus: '0.50'
+					memory: 50M
+				reservations:
+					cpus: '0.25'
+					memory: 25M
+    container_name: jupyter
+# docker-compose -p docker up --build
