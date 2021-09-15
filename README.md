@@ -3,7 +3,7 @@
 
 **Project Started**-7th september 2021.
 
-**Data set used for analysis**- Green and Yellow taxi data for 2017,2018,2019 years (will take 2015-2016 data if required).
+**Data set used for analysis**- Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data if required).
 
 **Technology Stack**-
 ● Python 3x and Anaconda distribution (https://www.anaconda.com/products/individual)
