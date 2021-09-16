@@ -16,6 +16,7 @@
 <tr><td>2017_Green_PaymentTypevsTip</td><td><img src="2017_Green_PaymentTypevsTip.PNG"/></td></tr>
 <tr><td>2017_Green_MonthlyDistribution</td><td><img src="2017_Green_MonthlyDistribution.PNG"/></td></tr>
 <tr><td>2019_HourlyDistribution</td><td><img src="2019_HourlyDistribution.PNG"/></td></tr>
+<tr><td>2019_Yellow_PassengerCountByPickupZoneDayOfWeek</td><td><img src="2019_Yellow_PassengerCountByPickupZoneDayOfWeek.gif"/></td></tr>
 <tr><td>2019_Yellow_PickUpDropsByDay</td><td><img src="2019_Yellow_PickUpDropsByDay.png"/></td></tr>
 <tr><td>DropvsTip</td><td><img src="DropvsTip.PNG"/></td></tr>
 <tr><td>2018_Green_PaymentType</td><td><img src="2018_Green_PaymentType.PNG"/></td></tr>
