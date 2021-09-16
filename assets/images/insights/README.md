@@ -1,13 +1,14 @@
-# Insights From Data
+# Insights from Data
 <table>
-  <tr><th>Metric</th><th>Image</th></tr>
-  <tr><td>2019_WeeklyDistribution</td><td><img src="2019_WeeklyDistribution.PNG"/></td></tr>
+<tr><th>Metric</th><th>Image</th></tr>
+<tr><td>2019_WeeklyDistribution</td><td><img src="2019_WeeklyDistribution.PNG"/></td></tr>
 <tr><td>2018_Green_DropoffTimevsHourvsTip</td><td><img src="2018_Green_DropoffTimevsHourvsTip.PNG"/></td></tr>
 <tr><td>2017_Green_WeeklyDistribution</td><td><img src="2017_Green_WeeklyDistribution.PNG"/></td></tr>
 <tr><td>2018_Green_MonthlyDistribution</td><td><img src="2018_Green_MonthlyDistribution.PNG"/></td></tr>
 <tr><td>2019_Green_NumberOfRidesByPickup:DropZone</td><td><img src="2019_Green_NumberOfRidesByPickup:DropZone.png"/></td></tr>
 <tr><td>2019_TimeSeries</td><td><img src="2019_TimeSeries.PNG"/></td></tr>
 <tr><td>Green taxi (store and fwd flag vs count-jan)- </td><td><img src="Green taxi (store and fwd flag vs count-jan)- .PNG"/></td></tr>
+<tr><td>2019_Green_CongestionSurchargeByHour:DayOfWeek</td><td><img src="2019_Green_CongestionSurchargeByHour:DayOfWeek.png"/></td></tr>
 <tr><td>drops</td><td><img src="drops.png"/></td></tr>
 <tr><td>pickups</td><td><img src="pickups.png"/></td></tr>
 <tr><td>2018_Green_TimeSeries_for_Vendors_for_Passengers</td><td><img src="2018_Green_TimeSeries_for_Vendors_for_Passengers.PNG"/></td></tr>
@@ -17,6 +18,7 @@
 <tr><td>2017_Green_HourlyDistribution</td><td><img src="2017_Green_HourlyDistribution.PNG"/></td></tr>
 <tr><td>2017_Green_PaymentTypevsTip</td><td><img src="2017_Green_PaymentTypevsTip.PNG"/></td></tr>
 <tr><td>2017_Green_MonthlyDistribution</td><td><img src="2017_Green_MonthlyDistribution.PNG"/></td></tr>
+<tr><td>2019_Yellow_SurchargeByHour:DayOfWeek</td><td><img src="2019_Yellow_SurchargeByHour:DayOfWeek.png"/></td></tr>
 <tr><td>2019_HourlyDistribution</td><td><img src="2019_HourlyDistribution.PNG"/></td></tr>
 <tr><td>2019_Yellow_PickUpDropsByDay</td><td><img src="2019_Yellow_PickUpDropsByDay.png"/></td></tr>
 <tr><td>DropvsTip</td><td><img src="DropvsTip.PNG"/></td></tr>
@@ -40,8 +42,10 @@
 <tr><td>Green Taxi (passenger count  for feb 2017-19 </td><td><img src="Green Taxi (passenger count  for feb 2017-19 .png"/></td></tr>
 <tr><td>2020_NumberOfTripsPerVendor</td><td><img src="2020_NumberOfTripsPerVendor.png"/></td></tr>
 <tr><td>2018_Green_VendorID</td><td><img src="2018_Green_VendorID.PNG"/></td></tr>
+<tr><td>2019_Green_CongestionSurchargeByLocation</td><td><img src="2019_Green_CongestionSurchargeByLocation.png"/></td></tr>
 <tr><td>2018_Green_HourlyDistribution</td><td><img src="2018_Green_HourlyDistribution.PNG"/></td></tr>
 <tr><td>2017_Green_TimeSeries_for_Vendors_for_passengers</td><td><img src="2017_Green_TimeSeries_for_Vendors_for_passengers.PNG"/></td></tr>
+<tr><td>2019_Yellow_CongestionSurchargeByLocation</td><td><img src="2019_Yellow_CongestionSurchargeByLocation.png"/></td></tr>
 <tr><td>CongestionSurchargeByVendor</td><td><img src="CongestionSurchargeByVendor.png"/></td></tr>
 <tr><td>2019_PickupvsTip</td><td><img src="2019_PickupvsTip.PNG"/></td></tr>
 <tr><td>2017_Green_PickupvsTip</td><td><img src="2017_Green_PickupvsTip.PNG"/></td></tr>
