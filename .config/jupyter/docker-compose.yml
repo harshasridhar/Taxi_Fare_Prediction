@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  jupyter:
+    image: 'jupyter/datascience-notebook:latest'
+    ports:
+     - 8888:8888
+    volumes:
+      - ./work:/home/jovyan/work
+    container_name: jupyter
+# docker-compose -p docker up --build
