@@ -29,8 +29,7 @@ To use this project, first clone the repo on your device using:
 **Project Started**-7th september 2021.
 
 **Data set used for analysis**
-    
-    Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data if required). *ADD LINKS HERE*
+Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data if required). *ADD LINKS HERE*
 
 **Technology Stack**
     
@@ -41,4 +40,4 @@ To use this project, first clone the repo on your device using:
 - Machine learning libraries: Sklearn (again comes with Anaconda distribution), scipy etc.
     
 ## Features
-    - *ADD CONTENT*
+*ADD CONTENT*
