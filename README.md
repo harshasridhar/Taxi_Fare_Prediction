@@ -1,4 +1,4 @@
-![Banner](link)
+![Banner](imgs/banner.png)
 
 # Taxi Fare Prediction
 
@@ -14,7 +14,8 @@ We also find insights about the taxi bookings, their pickup/drop locations, time
 - [Usage](#Usage)
 - [Details](#Details)
 - [Features](#Features)
-
+- [Future Improvements](#Scope)
+- 
 ## Usage
 To use this project, first clone the repo on your device using:
 
@@ -41,3 +42,5 @@ Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data
     
 ## Features
 *ADD CONTENT*
+
+## Scope
