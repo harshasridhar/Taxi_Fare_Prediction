@@ -40,9 +40,9 @@ Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data
     
 ## Features
 The data has cleaned and we have taken following conditions-
-Passender _count >0
-trip_distance>0
-PU and DO location ID >0
+Passender _count >0 ;
+trip_distance>0 ; 
+PU and DO location ID >0 ;
 fair_amount>= $2 (as the minimum price of fair starts with $2.5 
 
 
