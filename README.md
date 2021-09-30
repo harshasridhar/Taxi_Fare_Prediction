@@ -23,8 +23,6 @@ To use this project, first clone the repo on your device using:
 
 ```git clone https://github.com/TeamEpicProjects/Taxi_Fare_Prediction.git```
 
-.*ADD MORE HERE*....
-
 ## Details
 
 **Project Started**-7th september 2021.
@@ -41,7 +39,12 @@ Green and Yellow taxi data for 2017,2018,2019 year (will take 2015-2016year data
 - Machine learning libraries: Sklearn (again comes with Anaconda distribution), scipy etc.
     
 ## Features
-**As in NYC the minimum fair amount is $2.5 
+The data has cleaned and we have taken following conditions-
+Passender _count >0
+trip_distance>0
+PU and DO location ID >0
+fair_amount>= $2 (as the minimum price of fair starts with $2.5 
+
 
 As we are taking target variagle as Fair Amount so amount grap of green taxi in 2017 is given below -
 ![image](https://user-images.githubusercontent.com/88528280/135269143-747bfc26-712b-401c-949e-baa6a5fe1058.png)
