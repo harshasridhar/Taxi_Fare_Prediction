@@ -39,6 +39,9 @@
 
 ## Insights
  - description of those graphs - findings
+SAMPLE: 
+![Monthly distribution](../imgs/Insights%20data/2017_Green_MonthlyDistribution.png)
+
 
 ## Project Architecture
 --- 
