@@ -46,6 +46,17 @@ PU and DO location ID >0 ;
 fair_amount>= $2 (as the minimum price of fair starts with $2.5 
 
 
+CLeaned data links -
+**2017_ yellow _cleaned file ---**https://drive.google.com/file/d/1-Qr6-iszBTviLH_ItDEF1OVnlxfOhSxh/view?usp=sharing**
+**2017_Green_cleaned file ---https://drive.google.com/file/d/1Cjtx1mu5zwDwMTtlecvUYFLwljBs7363/view?usp=sharing**
+
+**2018_yellow_cleaned file --https://drive.google.com/file/d/1SubJekFsg7c503jrJRYGQ3xr-Nr9hUIC/view?usp=sharing**
+**2018_green_cleaned file --https://drive.google.com/file/d/12UXeBHk-diNxYyYOQU57HpgO7OumrhKa/view?usp=sharing**
+
+**2019_yellow_cleaned file --https://drive.google.com/file/d/1-kQGAdX3WnmbeV9X60r1nUVgWNcQ5RtY/view?usp=sharing**
+**2019_green_cleaned file --https://drive.google.com/file/d/1YVsMrK0e9w1exFA9eoDqokyDL_CfFl0B/view?usp=sharing**
+
+
 As we are taking target variagle as Fair Amount so amount grap of green taxi in 2017 is given below -
 ![image](https://user-images.githubusercontent.com/88528280/135269143-747bfc26-712b-401c-949e-baa6a5fe1058.png)
 
