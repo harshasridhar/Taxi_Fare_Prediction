@@ -12,7 +12,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
-
+  
    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
    <script src="js/leaflet.awesome-markers.js"></script>
    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   -->
@@ -27,7 +27,24 @@
    
    <script>
 	   var markers=[];
-var addresses=[];
+	var addresses=[];
+	var map;
+	var geoJsonLayer;
+	var legend;
+	var showZones = false;
+	function toggleZones(){
+		if(showZones){
+			map.removeLayer(geojsonLayer);
+			$(".info").hide();
+			$("#zone").html("Show Expected Demand");
+		}
+		else{
+			geojsonLayer.addTo(map);
+			$(".info").show();
+			$("#zone").html("Hide Expected Demand");
+		}
+		showZones = !showZones;	
+	}
 
 	   function predict(){
 	var src=markers[0]._latlng;
@@ -53,6 +70,7 @@ var addresses=[];
 			console.log(prediction)
 			$.LoadingOverlay("hide");
 		});
+	
 
 
 	// $.post(url='http://localhost:8081/compute',data=JSON.stringify(request_body),headers={'Content-Type':'application/json'},function(data1){
@@ -66,13 +84,44 @@ var addresses=[];
 <style>
 body{
 	font-size: 20px;
-font-family: 'Oswald';
+font-family: 'Roboto';
 }
 .container{
 	padding: 0px;
 	margin-top: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
+}
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.info {
+padding: 6px 8px;
+font: 14px/16px Arial, Helvetica, sans-serif;
+background: white;
+background: rgba(255,255,255,0.8);
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+border-radius: 5px;
+}
+.legend {
+background-color: “black”;
+line-height: 25px;
+color: #555;
+width: auto;
+}
+.legend i {
+width: 18px;
+height: 18px;
+float: left;
+margin-right: 8px;
+opacity: 0.7;
 }
 </style>
 </head>
@@ -82,9 +131,17 @@ font-family: 'Oswald';
 			<h1 style="width:100%; text-align:center; background-color:#153e67; color:#8db600">NYC TLC</h1>
 			<!-- <img src="NYCCabs.jpeg"/> -->
 		</div>
-		<div class="row">
-			<div class="col-7" style="width:fit-content">
-				<div id="map" style="min-width: 660px; min-height: 500px; position: relative;"></div>
+		<div class="row" style="margin-left: 10px; ">
+			<div class="col-8" style="width:fit-content;">
+				<div id="map" style="min-width: 760px; min-height: 560px; position: relative;"></div>
+				<div class="row">
+					<div class="col-2">
+						<button id="zone" onclick="toggleZones()" style="position: relative; " class="btn btn-primary">Show Expected Demand</button>
+					</div>
+					<div class="col-10">
+
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-2">Source:</div>
 					<div class="col-10"><input id="src" type="text" readonly placeholder="Source" style="width:100%; color: #cc2c45;"/></div>
@@ -115,7 +172,7 @@ font-family: 'Oswald';
 				</div>
 				
 			</div>
-			<div class="col-5">
+			<div class="col-4">
 				<div class="row">
 					<div class="d-flex">
 						<div class="form-check form-switch ms-auto mt-3 me-3">
@@ -189,10 +246,10 @@ their pricing to gain a good customer base and stay competitive.
 				<!--  -->
 			
 		</div>
-		<div class="row" style="background-color: #153e67; color:white">
+		<div class="row" style="background-color: #153e67; color:white;">
 			<div class="col-sm-3">
-				<div class="row>">
-					<div class="col-sm-1">Team Lead</div>
+				<div class="row" style="margin: 5px">
+					<div class="col-sm-7">Team Lead</div>
 					<div>
 						<figure style="text-align:center">
 							<img src="css/images/profile.jpg" style="width: 40%"  />
@@ -204,19 +261,19 @@ their pricing to gain a good customer base and stay competitive.
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<div class="row>">
-					<div class="col-sm-1">Team Member</div>
+				<div class="row"  style="margin: 5px">
+					<div class="col-sm-7">Team Member</div>
 					<div>
 						<figure style="text-align:center">
-							<img src="css/images/profile.jpg" style="width: 40%"  />
+							<img width="200" src="https://media-exp1.licdn.com/dms/image/C5603AQGgTooSpRGPjA/profile-displayphoto-shrink_200_200/0/1614342047641?e=1639612800&amp;v=beta&amp;t=751amCppYi0BEuoesXl7XTn7pO7-C5D8Lf13E2-K_WY" height="200" alt="Harsha Sridhar"  class="user">
 							<figcaption>Mr Harsha.M.S</figcaption>
 						</figure>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<div class="row>">
-					<div class="col-sm-1">Team Member</div>
+				<div class="row"  style="margin: 5px">
+					<div class="col-sm-7">Team Member</div>
 					<div>
 						<figure style="text-align:center">
 							<img src="css/images/profile.jpg" style="width: 40%"  />
@@ -226,8 +283,8 @@ their pricing to gain a good customer base and stay competitive.
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<div class="row>">
-					<div class="col-sm-1">Team Member</div>
+				<div class="row"  style="margin: 5px">
+					<div class="col-sm-7">Team Member</div>
 					<div>
 						<figure style="text-align:center">
 							<img src="css/images/profile.jpg" style="width: 40%"  />
@@ -261,11 +318,12 @@ their pricing to gain a good customer base and stay competitive.
 	<script src="js/datetimepicker/php-date-formatter.js"></script>
 	<script src="js/datetimepicker/jquery.datetimepicker.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 	<script src="js/switch.js"></script>
 <script>
 
 
-var map = L.map('map').setView([40.72,-73.93], 11);
+map = L.map('map').setView([40.72,-73.93], 11);
 $("#map").css({"width":"fit-content", "height":"fit-content"});
 $(document).ready(function(){
 	
@@ -366,7 +424,53 @@ var img='marker-icon-red.png';
   
 };
 map.on('click', newMarker)
-
+$.get('http://localhost:8081/density',function(data){
+	data=JSON.parse(data)
+	function getColor(d) {
+    		return d > 100 ? '#800026' :
+           		d > 50  ? '#BD0026' :
+           		d > 20  ? '#E31A1C' :
+           		d > 10  ? '#FC4E2A' :
+           		d > 5   ? '#FD8D3C' :
+           		d > 2   ? '#FEB24C' :
+           		d > 1   ? '#FED976' :
+                      		'#FFEDA0';
+	}
+	function style(feature) {
+    	return {
+        	fillColor: getColor(data[feature.properties.location_id]),
+        	weight: 2,
+        	opacity: 1,
+        	color: 'white',
+        	dashArray: '3',
+        	fillOpacity: 0.7
+    	}
+	};
+	function onEachFeature(feature, layer){
+		layer.click(newMarker)
+	}
+	geojsonLayer = new L.GeoJSON.AJAX("http://localhost:8081/geojson",{style: style});
+	legend = L.control({position: 'bottomright'});
+		console.log(legend);
+		var grades = [0,1,2,5,10,20,50,100];
+		var text="Expected Rides<br>";
+		for (var i = 0; i < grades.length; i++) {
+        text +=
+            '<i class="circle" style="background:' + getColor(grades[i] + 1) + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br style="display: block;margin: 10px 0;">' : '+');
+    	}
+		
+		legend.onAdd = function (map) {
+		var div = L.DomUtil.create('div', 'info legend');
+			div.innerHTML = text;
+		return div;
+		};
+	legend.addTo(map);
+	$(".info").hide();
+	if(showZones){
+		geojsonLayer.addTo(map);
+	}
+});
 });
 </script>
 

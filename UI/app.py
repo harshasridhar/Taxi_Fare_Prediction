@@ -13,7 +13,7 @@ from sklearn.preprocessing import StandardScaler
 from pandas.plotting import autocorrelation_plot
 from statsmodels.graphics.tsaplots import plot_acf
 from sklearn.neural_network import MLPRegressor
-from flask import Flask, flash, redirect, request, jsonify, make_response
+from flask import Flask, flash, redirect, request, jsonify, make_response, Response
 import json
 import requests
 import urllib.parse
@@ -21,6 +21,7 @@ from datetime import datetime
 from flask_cors import CORS, cross_origin
 import pickle
 model=pickle.load(open('models/ensemble.model','rb'))
+dt=pickle.load(open('models/dt_regressor.model','rb'))
 from enum import IntEnum
 from dotenv import dotenv_values
 config = dotenv_values(".env")
@@ -30,7 +31,6 @@ class HttpStatus(IntEnum):
     OK = 200
 from flask import Blueprint
 history=pd.DataFrame(columns=['trip_duration','trip_distance','hour_of_day','day_of_week','fare_amount','timestamp','request_timestamp'])
-blueprint = Blueprint('blueprint', __name__)
 api_key=config['API_KEY']
 app=Flask(__name__)
 app.config['SECRET_KEY'] = config['SECRET_KEY']
@@ -41,7 +41,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def server_info():
     return jsonify({'name': 'Test APIs', 'title': 'Mock APIs', 'description': 'description of your API', 'termsOfService': '', 'contact': None, 'license': None, 'version': 'v1'}), int(HttpStatus.OK)
 
-@app.route("/compute",methods=['OPTIONS'])
 def _build_cors_preflight_response():
     response = make_response()
     response.headers.add("Access-Control-Allow-Origin", "*")
@@ -49,26 +48,10 @@ def _build_cors_preflight_response():
     response.headers.add("Access-Control-Allow-Methods", "*")
     return response
 
-@app.route("/geocode",methods=['OPTIONS'])
-def _build_cors_preflight_response1():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Headers", "*")
-    response.headers.add("Access-Control-Allow-Methods", "*")
-    return response
-
-
-@blueprint.after_request # blueprint can also be app~~
-def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
-    header['Access-Control-Allow-Headers']='*'
-    header['Access-Control-Allow-Methods']='*'
-    header['Access-Control-Expose-Headers']='*'
-    return response
-
-@app.route("/geocode",methods=["GET"])
+@app.route("/geocode",methods=["GET","OPTIONS"])
 def geocode():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response
     reverse = request.args.get('reverse')
     lat = request.args.get('lat')
     lng = request.args.get('lng')
@@ -77,8 +60,10 @@ def geocode():
     response_data=response_data.json()
     return jsonify(response_data['hits'][-1])
 
-@app.route("/compute",methods=["POST"])
+@app.route("/compute",methods=["POST","OPTIONS"])
 def compute_price():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response()
     actualBody = json.loads(request.data)
     print(actualBody)
     url='https://graphhopper.com/api/1/route?locale=en&point='+actualBody['from'].replace(' ','')+'&point='+actualBody['to'].replace(' ','') \
@@ -103,6 +88,26 @@ def compute_price():
     return jsonify({'prediction':Y_pred[0]})
     # return jsonify({'distance': route_json['paths'][0]['distance'], 'time':float(route_json['paths'][0]['time']/ (1.0*60000))})
 
+@app.route("/geojson",methods=['GET','OPTIONS'])
+def get_geojson():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response()
+    text_data = open('zones.geojson').read()
+    return Response(text_data, mimetype="application/json")
+
+@app.route("/density",methods=["GET","OPTIONS"])
+def get_density():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response()
+    
+    pred_data=pd.DataFrame(columns=['PULocationID','day_of_week','hour_of_day','Count'])
+    pred_data['PULocationID'] = list(range(1,266))
+    pred_data['day_of_week']=list([5]*len(pred_data.index))
+    pred_data['hour_of_day']=list([19]*len(pred_data.index))
+    pred_data['Count']=dt.predict(pred_data[['PULocationID','day_of_week','hour_of_day']])
+    pred_data.dropna()
+    pred_data.set_index('PULocationID',inplace=True)
+    return make_response(pred_data['Count'].to_json())
 
 @app.route("/history",methods=['GET'])
 def get_history():
