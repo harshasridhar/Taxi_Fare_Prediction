@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: harshasridhar/Taxi_Fare_Prediction # This is the action
+      - uses: harshasridhar/Taxi_Fare_Prediction@v1.0.0.dev # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nyc-tlc-taxi-fare-prediction" #Must be unique in Heroku
