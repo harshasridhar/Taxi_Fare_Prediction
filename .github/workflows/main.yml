@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./UI
     steps:
       - uses: actions/checkout@v2
       - uses: harshasridhar/Taxi_Fare_Prediction@release_1 # This is the action
