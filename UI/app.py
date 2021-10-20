@@ -20,6 +20,7 @@ import urllib.parse
 from datetime import datetime
 from flask_cors import CORS, cross_origin
 import pickle
+models={}
 model=pickle.load(open('models/ensemble.model','rb'))
 dt=pickle.load(open('models/dt_regressor.model','rb'))
 from enum import IntEnum
@@ -37,6 +38,10 @@ app.config['SECRET_KEY'] = config['SECRET_KEY']
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 # model=pickle.load(open('~/Downloads/ensemble.model','rb'))
+
+def load_models():
+    pass
+
 @app.route("/info", methods=['GET'])
 def server_info():
     return jsonify({'name': 'Test APIs', 'title': 'Mock APIs', 'description': 'description of your API', 'termsOfService': '', 'contact': None, 'license': None, 'version': 'v1'}), int(HttpStatus.OK)
@@ -83,13 +88,18 @@ def compute_price():
     print(last_record[['trip_duration','trip_distance','hour_of_day','day_of_week']])
     Y_pred = model.predict(history.tail(1)[['trip_duration','trip_distance','hour_of_day','day_of_week']])
     print(Y_pred)
+    temp_df = pd.DataFrame(columns=['trip_duration','trip_distance','hour_of_day','day_of_week'])
+    temp_df.loc[len(temp_df.index)] = {'trip_distance':float(details['distance'])*0.0006213712,'trip_duration':float(details['time'])/60000.0, 'hour_of_day':date_time_obj.hour-1, 'day_of_week':date_time_obj.weekday()}
+    temp_df.loc[len(temp_df.index)] = {'trip_distance':float(details['distance'])*0.0006213712,'trip_duration':float(details['time'])/60000.0, 'hour_of_day':date_time_obj.hour+1, 'day_of_week':date_time_obj.weekday()}
+    Y_pred_prev_hr = model.predict(temp_df)
+    print(Y_pred_prev_hr)
     history.at[len(history.index)-1, 'fare_amount']=Y_pred[0]
     print(Y_pred)
-    return jsonify({'prediction':Y_pred[0]})
+    return jsonify({'prediction':{'prev_hour': Y_pred_prev_hr[0],'current':Y_pred[0],'next_hour':Y_pred_prev_hr[1]}})
     # return jsonify({'distance': route_json['paths'][0]['distance'], 'time':float(route_json['paths'][0]['time']/ (1.0*60000))})
 
 @app.route("/geojson",methods=['GET','OPTIONS'])
-def get_geojson():
+def get_geojson() -> Response:
     if request.method == 'OPTIONS':
         return _build_cors_preflight_response()
     text_data = open('zones.geojson').read()
@@ -103,7 +113,7 @@ def get_density():
     pred_data=pd.DataFrame(columns=['PULocationID','day_of_week','hour_of_day','Count'])
     pred_data['PULocationID'] = list(range(1,266))
     pred_data['day_of_week']=list([5]*len(pred_data.index))
-    pred_data['hour_of_day']=list([19]*len(pred_data.index))
+    pred_data['hour_of_day']=list([13]*len(pred_data.index))
     pred_data['Count']=dt.predict(pred_data[['PULocationID','day_of_week','hour_of_day']])
     pred_data.dropna()
     pred_data.set_index('PULocationID',inplace=True)
@@ -114,4 +124,5 @@ def get_history():
     return jsonify(history.to_dict('dict'))
 
 if __name__ == '__main__':
+    load_models()
     app.run(host="localhost", port=int("8081"),debug=True)
