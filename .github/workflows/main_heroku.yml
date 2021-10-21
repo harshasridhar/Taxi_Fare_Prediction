@@ -20,7 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: log into VPS and trigger deploy script
-        uses: appleboy/ssh-action@master
+        uses: harshasridhar/Taxi_Fare_Prediction@main
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nyc-tlc-taxi-fare-prediction" #Must be unique in Heroku
