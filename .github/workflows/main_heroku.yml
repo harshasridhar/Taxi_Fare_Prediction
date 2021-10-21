@@ -17,3 +17,6 @@ jobs:
           heroku_app_name: "nyc-tlc-taxi-fare-prediction" #Must be unique in Heroku
           heroku_email: "sridharsha598@gmail.com"
           usedocker: true
+        env:
+          API_KEY: ${{secrets.API_KEY}}
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
