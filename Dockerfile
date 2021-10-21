@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 RUN mkdir -p models
 RUN python download_models.py
 EXPOSE 8081
-ENTRYPOINT ["python","app.py"]
+ENTRYPOINT ["python","/python-flask/app.py"]
