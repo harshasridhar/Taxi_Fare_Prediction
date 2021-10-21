@@ -1,25 +1,18 @@
 name: Deploy
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the live branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy:
-    # The type of runner that the job will run on
+  build:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: log into VPS and trigger deploy script
-        uses: harshasridhar/Taxi_Fare_Prediction@main
+      - uses: actions/checkout@v2
+      - uses: harshasridhar/Taxi_Fare_prediction@main # This is the action
         with:
-          script: sh deploy.sh
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "nyc-tlc-taxi-fare-prediction" #Must be unique in Heroku
+          heroku_email: "sridharsha598@gmail.com"
+          usedocker: true
